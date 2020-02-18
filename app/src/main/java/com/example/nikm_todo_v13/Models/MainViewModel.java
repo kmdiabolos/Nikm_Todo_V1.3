@@ -11,6 +11,7 @@ import com.example.nikm_todo_v13.DB.DayDao;
 import com.example.nikm_todo_v13.DB.DayData;
 import com.example.nikm_todo_v13.DB.DayDatabase;
 import com.example.nikm_todo_v13.DB.EveryData;
+import com.example.nikm_todo_v13.MainData;
 
 import java.util.List;
 
@@ -28,9 +29,30 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<DayData>> getEveryToDayInfo(){
-        return db.everyDao().getEveryToDayInfo();
+        return db.dayDao().getEveryToDayInfo();
     }
-    //insert부분
+
+    public LiveData<List<EveryData>> getEveryInfo(){
+        return db.dayDao().getEveryInfo();
+    }
+
+    public void insertEvery(EveryData everyData) {
+        new MainViewModel.InsertAsyncTaskEvery(db.dayDao()).execute(everyData);
+    }
+    private static class InsertAsyncTaskEvery extends AsyncTask<EveryData, Void, Void> {
+        private DayDao mEveryDao;
+
+        public InsertAsyncTaskEvery(DayDao todoDao) {
+            this.mEveryDao = todoDao;
+        }
+
+        @Override
+        protected Void doInBackground(EveryData... everyData) {
+            mEveryDao.insertEvery(everyData[0]);
+
+            return null;
+        }
+    }
     public void insertDay(DayData dayData) {
         new InsertAsyncTaskDay(db.dayDao()).execute(dayData);
     }
@@ -46,7 +68,41 @@ public class MainViewModel extends AndroidViewModel {
             mDayDao.insert(dayData[0]);
             return null;
         }
+    }/*
+
+    public void insertFinish(MainData dayData){
+        new InsertAsyncTaskFinish(db.dayDao()).execute(dayData);
     }
+    private static class InsertAsyncTaskFinish extends AsyncTask<MainData,Void,Void>{
+        private DayDao mFInishDao;
+        public InsertAsyncTaskFinish(DayDao todoDao){this.mFInishDao = todoDao; }
+
+        @Override
+        protected Void doInBackground(MainData... dayData) {
+            mFInishDao.insert(dayData[0]);
+            return null;
+        }
+    }
+*/
+
+
+
+
+
+    public void deleteEvery(EveryData everyData){ new MainViewModel.DeleteAsyncTaskEvery(db.dayDao()).execute(everyData);}
+    private  static class DeleteAsyncTaskEvery extends AsyncTask<EveryData,Void,Void>{
+        private DayDao mDayDao;
+
+        public DeleteAsyncTaskEvery(DayDao everyDao){this.mDayDao = everyDao;}
+
+        @Override
+        protected Void doInBackground(EveryData... everyData){
+            mDayDao.deleteEvery(everyData[everyData.length-1]);
+            return null;
+        }
+    }
+    //insert부분
+
 
 
 

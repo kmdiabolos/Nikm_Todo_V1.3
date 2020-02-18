@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nikm_todo_v13.DB.DayData;
 import com.example.nikm_todo_v13.MainAdapter;
+import com.example.nikm_todo_v13.MainData;
 import com.example.nikm_todo_v13.Models.MainViewModel;
 import com.example.nikm_todo_v13.R;
 
@@ -27,7 +28,7 @@ public class DayDoFragment extends Fragment {
     Button btn_add;
     RecyclerView recyclerView;
     MainViewModel mainViewModel;
-    ArrayList<DayData> arrayList = new ArrayList<>();
+    ArrayList<MainData> arrayList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -49,6 +50,8 @@ public class DayDoFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 mainViewModel.deleteDay(mainAdapter.getArrayAt(viewHolder.getAdapterPosition()));
+           //     mainViewModel.insertFinish(mainAdapter.getArrayAt(viewHolder.getAdapterPosition()));
+                System.out.println("delete");
             }
         }).attachToRecyclerView(recyclerView);
         return view;

@@ -14,11 +14,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nikm_todo_v13.DB.DayData;
 import com.example.nikm_todo_v13.DB.EveryData;
 import com.example.nikm_todo_v13.EveryAdapter;
-import com.example.nikm_todo_v13.MainAdapter;
-import com.example.nikm_todo_v13.Models.EveryViewModel;
+import com.example.nikm_todo_v13.MainData;
 import com.example.nikm_todo_v13.Models.MainViewModel;
 import com.example.nikm_todo_v13.R;
 
@@ -29,7 +27,7 @@ public class EveryDoFragment extends Fragment {
     View view;
     Button btn_add;
     RecyclerView recyclerView;
-    EveryViewModel mainViewModel;
+    MainViewModel mainViewModel;
 
     @Nullable
     @Override
@@ -39,7 +37,7 @@ public class EveryDoFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_day);
         recyclerView.setLayoutManager(new LinearLayoutManager(EveryDoFragment.this.getContext()));
         recyclerView.setAdapter(mainAdapter);
-        mainViewModel = ViewModelProviders.of(this).get(EveryViewModel.class);
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,

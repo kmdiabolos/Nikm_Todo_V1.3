@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.nikm_todo_v13.DB.DayData;
 import com.example.nikm_todo_v13.DB.EveryData;
-import com.example.nikm_todo_v13.Models.EveryViewModel;
 import com.example.nikm_todo_v13.Models.MainViewModel;
 import com.example.nikm_todo_v13.R;
 
@@ -42,7 +41,6 @@ public class DoActivity extends AppCompatActivity {
         mn = String.valueOf(tp.getMinute());
         numStars = rating.getRating();
         MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        EveryViewModel everyViewModel = ViewModelProviders.of(this).get(EveryViewModel.class);
         Intent intent = getIntent();
         nowPage = intent.getStringExtra("nowPage");
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -105,7 +103,7 @@ public class DoActivity extends AppCompatActivity {
                         viewModel.insertDay(new DayData(hour+":"+mn,do_day,stars));
                         break;
                     case "every":
-                        everyViewModel.insertEvery(new EveryData(hour+":"+mn,do_day,stars));
+                        viewModel.insertEvery(new EveryData(hour+":"+mn,do_day,stars));
                         break;
                     case"month":
                         break;
