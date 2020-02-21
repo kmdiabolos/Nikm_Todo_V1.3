@@ -1,6 +1,7 @@
 package com.example.nikm_todo_v13.DB;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.example.nikm_todo_v13.MainData;
